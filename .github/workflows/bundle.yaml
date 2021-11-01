@@ -1,0 +1,15 @@
+name: Bundle
+on: push
+jobs:
+  bundle:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.15.3
+      - run: deno bundle std.ts > std_bundle.js
+      - uses: actions/upload-artifact@v2
+        with:
+          name: std_bundle
+          path: std_bundle.js
